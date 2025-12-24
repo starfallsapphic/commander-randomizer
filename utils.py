@@ -34,7 +34,7 @@ def random_card(
     settings: dict[str, any],
     is_nonland: bool = True,
 ) -> dict:
-    query = f'f:commander id<={settings["colour_identity"]} -t:sticker year>={settings["earliest_year"]}'
+    query = f'f:commander id<={settings["colour_identity"]} -t:sticker -t:attraction year>={settings["earliest_year"]}'
     if(is_nonland):
         query += ' -t:land'
     else:
