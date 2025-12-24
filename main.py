@@ -57,7 +57,10 @@ def main():
 
     decklist = ""
     for card in deck:
-        decklist += f"1x {card["name"]} ({card["set"]})\n"
+        if(settings["randomise_set_codes"]):
+            decklist += f"1x {card["name"]} ({card["set"]})\n"
+        else:
+            decklist += f"1x {card["name"]}\n"
     
 
     print(f"\nCommander: {commander["name"]}")
@@ -108,7 +111,7 @@ def add_cards(
                 nonlands_to_generate += 1
         
         if not dupe:
-            print(f"[{threading.get_ident()}] Adding card #{len(deck)}{" (land)" if is_generating_land else ""}: {card["name"]}")
+            print(f"Adding card #{len(deck)}{" (land)" if is_generating_land else ""}: {card["name"]}")
             deck.append(card)
 
         sleep(delay_between) # scryfall api requests an average maximum of 0.1s between each request
