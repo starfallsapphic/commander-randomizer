@@ -65,7 +65,7 @@ def main():
 
     print(f"\nCommander: {commander["name"]}")
     print(f"{settings["colour_identity"]} deck generated with {len(deck)} cards.")
-    if(len(deck) > 100):
+    if(len(deck) < 100):
         print(f"Add {100-len(deck)} lands to create a legal Commander deck.")
 
     filename = write_to_file("deck", decklist)
