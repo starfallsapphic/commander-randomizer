@@ -36,9 +36,12 @@ def random_card(
 ) -> dict:
     query = f'f:commander id<={settings["colour_identity"]} -t:sticker -t:attraction year>={settings["earliest_year"]}'
     if(is_nonland):
-        query += ' -t:land'
+        query += ' (-t:land or (is:dfc not:mdfc))'
     else:
-        query += ' t:land'
+        query += ' t:land -(is:dfc not:mdfc)'
+        if settings["lands_produce_colours"]:
+            query += f' produces<={settings["colour_identity"]}'
+    
     if not settings["game_changers"]:
         query += ' not:gamechanger'
     if not settings["universes_beyond"]:
@@ -48,7 +51,7 @@ def random_card(
 
     return {
         "name": card["name"], 
-        "set": card["set"]
+        "set": card["set"],
     }
 
 def request_random_card(query: str):
